@@ -5,6 +5,7 @@ const Dashboard = () => {
     return <main>
         <Navbar />
         <Search />
+        <Info />
         <User />
         <Followers />
         <Pie3D />

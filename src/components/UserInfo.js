@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UserCard, Followers } from './index';
+import { UserCard, UserFollowers } from './index';
 const UserInfo = () => {
   return <section className="section">
     <Wrapper className='section-center'>
       <UserCard />
-      <Followers />
+      <UserFollowers />
     </Wrapper>;
   </section>
 };

@@ -7,47 +7,37 @@ const Info = () => {
     const { githubUser } = useGlobalContext();
     //destructure to get data neeeded for info
     const { followers, following, public_repos, public_gists } = githubUser;
+    //create array for easier render
+    const items = [
+        { id: 1, icon: <GoRepo className='icon' />, label: 'repos', value: public_repos, color: 'pink' },
+        { id: 2, icon: <FiUsers className='icon' />, label: 'followers', value: followers, color: 'green' },
+        { id: 3, icon: <FiUserPlus className='icon' />, label: 'following', value: following, color: 'purple' },
+        { id: 4, icon: <GoGist className='icon' />, label: 'gists', value: public_gists, color: 'yellow' }
+    ]
     return <section className='section'>
         <Wrapper className='section-center'>
-            <article className='item'>
-                <span className='pink'>
-                    <GoRepo></GoRepo>
-                </span>
-                <div>
-                    <h3>{public_repos}</h3>
-                    <p>repos</p>
-                </div>
-            </article>
-            <article className='item'>
-                <span className='green'>
-                    <FiUsers></FiUsers>
-                </span>
-                <div>
-                    <h3>{followers}</h3>
-                    <p>followers</p>
-                </div>
-            </article>
-            <article className='item'>
-                <span className='purple'>
-                    <FiUserPlus></FiUserPlus>
-                </span>
-                <div>
-                    <h3>{following}</h3>
-                    <p>following</p>
-                </div>
-            </article>
-            <article className='item'>
-                <span className='yellow'>
-                    <GoGist></GoGist>
-                </span>
-                <div>
-                    <h3>{public_gists}</h3>
-                    <p>gists</p>
-                </div>
-            </article>
+            {items.map(item => {
+                return <InfoItem key={item.id} {...item} />
+            })}
         </Wrapper>;
     </section>
 };
+
+//local component for each item
+
+const InfoItem = ({ icon, label, value, color }) => {
+    return (
+        <article className='item'>
+            <span className={color}>
+                {icon}
+            </span>
+            <div>
+                <h3>{value}</h3>
+                <p>{label}</p>
+            </div>
+        </article>
+    )
+}
 
 const Wrapper = styled.section`
   display: grid;

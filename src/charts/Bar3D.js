@@ -33,11 +33,16 @@ const Bar3D = ({ data }) => {
         dataSource: {
             // Chart Configuration
             chart: {
-                "caption": "Languages",
+                "caption": "Most Forked Repos",
                 "enableSmartLabels": "0",
                 "startingAngle": "0",
-                "showPercentValues": "1",
-                "decimals": "1",
+                "xAxisName": 'Forks',
+                "yAxisName": 'Repos',
+                "xAxisNameFontSize": '20',
+                "yAxisNameFontSize": '20',
+                "thousandSeparator": 'k',
+                "palettecolors": '#003f5c,#58508d,#bc5090,#ff6361,#ffa600',
+                "showValues": '1',
                 "useDataPlotColorForLabels": "1",
                 "theme": "fusion"
             },

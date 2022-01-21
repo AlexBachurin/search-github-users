@@ -60,28 +60,27 @@ const Repositories = () => {
     console.log(mostPopularRepos)
     //sort it and slice it to 5, since we wont show too many repos
     let mostPopularReposChartData = Object.values(mostPopularRepos).sort((a, b) => b.value - a.value).slice(0, 5);
-    console.log(mostPopularReposChartData)
-    const chartData = [
-        {
-            label: "HTML",
-            value: "2900"
-        },
-        {
-            label: "CSS",
-            value: "260"
-        },
-        {
-            label: "Javascript",
-            value: "180"
-        },
-    ];
+
+    /// **** MOST FORKS FOR REPOS **** 
+    const mostForks = repos.reduce((total, currentItem) => {
+        const { name, forks } = currentItem;
+        if (!total[name]) {
+            total[name] = { label: name, value: forks };
+        } else {
+            total[name] = { ...total[name], value: total[name].value + forks };
+        }
+        return total;
+    }, {})
+    //sort it and slice it to 5, since we wont show too many repos
+    let mostForksChartData = Object.values(mostForks).sort((a, b) => b.value - a.value).slice(0, 5);
+
     return <section className='section'>
         <Wrapper className='section-center'>
             {/* <ExampleChart data={chartData} /> */}
             <Pie3D data={mostPopularChartData} />
             <Column2D data={mostPopularReposChartData} />
             <Doughnut2D data={mostStarsChartData} />
-            <Bar3D data={chartData} />
+            <Bar3D data={mostForksChartData} />
         </Wrapper>
     </section>
 }

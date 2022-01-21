@@ -33,12 +33,12 @@ const Doughnut2D = ({ data }) => {
         dataSource: {
             // Chart Configuration
             chart: {
-                "caption": "Languages",
+                "caption": "Stars Per Language",
                 "enableSmartLabels": "0",
                 "startingAngle": "0",
-                "showPercentValues": "1",
-                "decimals": "1",
+                "showPercentValues": '0',
                 "useDataPlotColorForLabels": "1",
+                "thousandSeparator": 'k',
                 "theme": "fusion"
             },
             // Chart Data

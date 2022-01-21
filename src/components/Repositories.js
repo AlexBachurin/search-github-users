@@ -4,7 +4,9 @@ import styled from 'styled-components'
 import { Pie3D, Bar3D, Column3D, Doughnut2D, ExampleChart } from '../charts/index'
 const Repositories = () => {
     const { repos } = useGlobalContext();
-    // console.log(repos)
+    console.log(repos)
+
+    // **** MOST POPULAR LANGUAGE ***
 
     //calculate most popular language in repos
     const mostPopular = repos.reduce((total, currentItem) => {
@@ -23,17 +25,29 @@ const Repositories = () => {
         }
         return total;
     }, {})
-
     //now transform our result to array with help of Object.values so we get proper data for chart 
     let mostPopularChartData = Object.values(mostPopular);
     //also sort it
     mostPopularChartData = mostPopularChartData.sort((a, b) => b.value - a.value)
-    console.log(mostPopularChartData)
 
+    /// **** MOST STARS ****
+    const mostStars = repos.reduce((total, currentItem) => {
+        const { language, stargazers_count } = currentItem;
+        if (!language) return total;
+
+        if (!total[language]) {
+            total[language] = { label: language, value: stargazers_count }
+        } else {
+            total[language] = { ...total[language], value: total[language].value + stargazers_count };
+        }
+        return total;
+    }, {})
+    console.log(mostStars)
+    let mostStarsChartData = Object.values(mostStars).sort((a, b) => b.value - a.value);
     const chartData = [
         {
             label: "HTML",
-            value: "290"
+            value: "2900"
         },
         {
             label: "CSS",
@@ -49,7 +63,7 @@ const Repositories = () => {
             {/* <ExampleChart data={chartData} /> */}
             <Pie3D data={mostPopularChartData} />
             <Column3D data={chartData} />
-            <Doughnut2D data={chartData} />
+            <Doughnut2D data={mostStarsChartData} />
             <Bar3D data={chartData} />
         </Wrapper>
     </section>

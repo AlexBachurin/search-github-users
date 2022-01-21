@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
-import { Pie3D, Bar3D, Column3D, Doughnut2D, ExampleChart } from '../charts/index'
+import { Pie3D, Bar3D, Column2D, Doughnut2D, ExampleChart } from '../charts/index'
 const Repositories = () => {
     const { repos } = useGlobalContext();
     console.log(repos)
@@ -31,6 +31,7 @@ const Repositories = () => {
     mostPopularChartData = mostPopularChartData.sort((a, b) => b.value - a.value)
 
     /// **** MOST STARS ****
+    //calculate most stars for each language
     const mostStars = repos.reduce((total, currentItem) => {
         const { language, stargazers_count } = currentItem;
         if (!language) return total;
@@ -42,8 +43,24 @@ const Repositories = () => {
         }
         return total;
     }, {})
-    console.log(mostStars)
     let mostStarsChartData = Object.values(mostStars).sort((a, b) => b.value - a.value);
+
+    /// **** MOST STARS FOR REPOS ****
+    //calculate most stars for each repository
+    const mostPopularRepos = repos.reduce((total, currentItem) => {
+        //get repo name and stars count from each repo
+        const { name, stargazers_count } = currentItem;
+        if (!total[name]) {
+            total[name] = { label: name, value: stargazers_count }
+        } else {
+            total[name] = { ...total[name], value: total[name].value + stargazers_count }
+        }
+        return total;
+    }, {})
+    console.log(mostPopularRepos)
+    //sort it and slice it to 5, since we wont show too many repos
+    let mostPopularReposChartData = Object.values(mostPopularRepos).sort((a, b) => b.value - a.value).slice(0, 5);
+    console.log(mostPopularReposChartData)
     const chartData = [
         {
             label: "HTML",
@@ -62,7 +79,7 @@ const Repositories = () => {
         <Wrapper className='section-center'>
             {/* <ExampleChart data={chartData} /> */}
             <Pie3D data={mostPopularChartData} />
-            <Column3D data={chartData} />
+            <Column2D data={mostPopularReposChartData} />
             <Doughnut2D data={mostStarsChartData} />
             <Bar3D data={chartData} />
         </Wrapper>

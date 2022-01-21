@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 //get static data for now
 import user from './mockData/mockUser'
 import followers from './mockData/mockFollowers'
+import repos from './mockData/mockRepos'
 const rootUrl = 'https://api.github.com';
 
 const AppContext = React.createContext();
@@ -13,7 +14,8 @@ const AppProvider = ({ children }) => {
     console.log(githubUser)
     return <AppContext.Provider value={{
         githubUser,
-        followers
+        followers,
+        repos
     }}>
         {children}
     </AppContext.Provider>

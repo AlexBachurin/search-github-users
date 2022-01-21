@@ -2,28 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../context';
 const UserFollowers = () => {
-    const { followers } = useGlobalContext();
-    console.log(followers)
-    return <Wrapper>
-        <div className="followers">
-            {followers.map(item => {
-                return <SingleFollower key={item.id} {...item} />
-            })}
-        </div>
-    </Wrapper>;
+  const { followers } = useGlobalContext();
+  return <Wrapper>
+    <div className="followers">
+      {followers.map(item => {
+        return <SingleFollower key={item.id} {...item} />
+      })}
+    </div>
+  </Wrapper>;
 };
 
 //local component for single follower
 const SingleFollower = ({ html_url, avatar_url, login }) => {
-    return (
-        <article>
-            <img src={avatar_url} alt="avatar" />
-            <div>
-                <h4>{login}</h4>
-                <a href={html_url}>{html_url}</a>
-            </div>
-        </article>
-    )
+  return (
+    <article>
+      <img src={avatar_url} alt="avatar" />
+      <div>
+        <h4>{login}</h4>
+        <a href={html_url}>{html_url}</a>
+      </div>
+    </article>
+  )
 }
 
 const Wrapper = styled.article`

@@ -23,23 +23,27 @@ ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
 
 
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
-const Bar3D = ({ data }) => {
+const ExampleChart = ({ data }) => {
     // STEP 3 - Creating the JSON object to store the chart configurations
     const chartConfigs = {
-        type: "bar3d", // The chart type
-        width: "100%", // Width of the chart
+        type: "column2d", // The chart type
+        width: "400", // Width of the chart
         height: "400", // Height of the chart
         dataFormat: "json", // Data type
         dataSource: {
             // Chart Configuration
             chart: {
-                "caption": "Languages",
-                "enableSmartLabels": "0",
-                "startingAngle": "0",
-                "showPercentValues": "1",
-                "decimals": "1",
-                "useDataPlotColorForLabels": "1",
-                "theme": "fusion"
+                //Set the chart caption
+                caption: "Countries With Most Oil Reserves [2017-18]",
+                //Set the chart subcaption
+                subCaption: "In MMbbl = One Million barrels",
+                //Set the x-axis name
+                xAxisName: "Country",
+                //Set the y-axis name
+                yAxisName: "Reserves (MMbbl)",
+                numberSuffix: "K",
+                //Set the theme for your chart
+                theme: "fusion"
             },
             // Chart Data
             data
@@ -49,4 +53,4 @@ const Bar3D = ({ data }) => {
     return (<ReactFC {...chartConfigs} />);
 }
 
-export default Bar3D;
+export default ExampleChart;

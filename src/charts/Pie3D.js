@@ -39,6 +39,7 @@ const Pie3D = ({ data }) => {
                 "showPercentValues": "1",
                 "decimals": "1",
                 "useDataPlotColorForLabels": "1",
+                "pieradius": '45%',
                 "theme": "fusion"
             },
             // Chart Data

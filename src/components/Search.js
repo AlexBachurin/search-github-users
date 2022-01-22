@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
-
+import { useGlobalContext } from '../context';
 const Search = () => {
     const [user, setUser] = useState('');
+
+    const { requests } = useGlobalContext();
 
     //form submit
     const handleSubmit = (e) => {
@@ -23,7 +25,7 @@ const Search = () => {
                     <button type='submit'>Search</button>
                 </div>
             </form>
-            <h3>requests: 55/60</h3>
+            <h3>requests: {requests}/60</h3>
         </Wrapper>
     </section>;
 };

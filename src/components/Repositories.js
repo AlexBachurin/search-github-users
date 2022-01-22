@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { Pie3D, Bar3D, Column2D, Doughnut2D } from '../charts/index'
 const Repositories = () => {
     const { repos } = useGlobalContext();
-    console.log(repos)
 
     // **** MOST POPULAR LANGUAGE ***
 
@@ -57,7 +56,6 @@ const Repositories = () => {
         }
         return total;
     }, {})
-    console.log(mostPopularRepos)
     //sort it and slice it to 5, since we wont show too many repos
     let mostPopularReposChartData = Object.values(mostPopularRepos).sort((a, b) => b.value - a.value).slice(0, 5);
 

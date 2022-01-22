@@ -20,7 +20,7 @@ const AppProvider = ({ children }) => {
     const [requests, setRequests] = useState(0);
     //state for error on 0 requests on user not found
     const [error, setError] = useState({ show: false, msg: '' });
-    console.log(githubUser)
+    const [loading, setLoading] = useState(false);
 
     //function to show remaining requests of user
     const checkRequests = () => {
@@ -44,13 +44,23 @@ const AppProvider = ({ children }) => {
     //Search User
 
     const searchUser = async (user) => {
+        setLoading(true)
         await axios(`https://api.github.com/users/${user}`)
             .then(res => {
                 console.log(res);
-                //set user data into state
-                setGithubUser(res.data)
+                //set user data into state if user exists
+                if (res.data) {
+                    setGithubUser(res.data)
+                    setLoading(false);
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+
+                handleError(true, 'User not found')
+                setLoading(false);
+
+            })
     }
 
 
@@ -65,7 +75,8 @@ const AppProvider = ({ children }) => {
         repos,
         requests,
         error,
-        searchUser
+        searchUser,
+        loading
 
     }}>
         {children}

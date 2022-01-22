@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
-import { Pie3D, Bar3D, Column2D, Doughnut2D, ExampleChart } from '../charts/index'
+import { Pie3D, Bar3D, Column2D, Doughnut2D } from '../charts/index'
 const Repositories = () => {
     const { repos } = useGlobalContext();
     console.log(repos)

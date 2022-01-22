@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../context';
 const UserFollowers = () => {
-  const { followers } = useGlobalContext();
+  const { userFollowers } = useGlobalContext();
   return <Wrapper>
     <div className="followers">
-      {followers.map(item => {
+      {userFollowers.map(item => {
         return <SingleFollower key={item.id} {...item} />
       })}
     </div>

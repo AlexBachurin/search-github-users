@@ -3,12 +3,12 @@ import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import { Pie3D, Bar3D, Column2D, Doughnut2D } from '../charts/index'
 const Repositories = () => {
-    const { repos } = useGlobalContext();
+    const { userRepos } = useGlobalContext();
 
     // **** MOST POPULAR LANGUAGE ***
 
     //calculate most popular language in repos
-    const mostPopular = repos.reduce((total, currentItem) => {
+    const mostPopular = userRepos.reduce((total, currentItem) => {
         const { language } = currentItem;
         //sometimes we get null as a result so if we get null we skip this
         if (!language) {
@@ -31,7 +31,7 @@ const Repositories = () => {
 
     /// **** MOST STARS ****
     //calculate most stars for each language
-    const mostStars = repos.reduce((total, currentItem) => {
+    const mostStars = userRepos.reduce((total, currentItem) => {
         const { language, stargazers_count } = currentItem;
         if (!language) return total;
 
@@ -46,7 +46,7 @@ const Repositories = () => {
 
     /// **** MOST STARS FOR REPOS ****
     //calculate most stars for each repository
-    const mostPopularRepos = repos.reduce((total, currentItem) => {
+    const mostPopularRepos = userRepos.reduce((total, currentItem) => {
         //get repo name and stars count from each repo
         const { name, stargazers_count } = currentItem;
         if (!total[name]) {
@@ -60,7 +60,7 @@ const Repositories = () => {
     let mostPopularReposChartData = Object.values(mostPopularRepos).sort((a, b) => b.value - a.value).slice(0, 5);
 
     /// **** MOST FORKS FOR REPOS **** 
-    const mostForks = repos.reduce((total, currentItem) => {
+    const mostForks = userRepos.reduce((total, currentItem) => {
         const { name, forks } = currentItem;
         if (!total[name]) {
             total[name] = { label: name, value: forks };

@@ -51,16 +51,27 @@ const AppProvider = ({ children }) => {
                 //set user data into state if user exists
                 if (res.data) {
                     setGithubUser(res.data)
+                    const { followers_url, repos_url } = res.data;
+                    axios(`${followers_url}?per_page=100`)
+                        .then(response => {
+                            setUserFollowers(response.data)
+                        })
+                        .catch(err => console.log(err));
+                    axios(`${repos_url}?per_page=100`)
+                        .then(response => {
+                            setUserRepos(response.data)
+                        })
+                        .catch(err => console.log(err));
                     setLoading(false);
                 }
             })
             .catch(err => {
                 console.log(err);
-
+                //if we dont get response set error to true and display message
                 handleError(true, 'User not found')
                 setLoading(false);
-
             })
+
     }
 
 
@@ -71,8 +82,8 @@ const AppProvider = ({ children }) => {
 
     return <AppContext.Provider value={{
         githubUser,
-        followers,
-        repos,
+        userFollowers,
+        userRepos,
         requests,
         error,
         searchUser,

@@ -45,33 +45,33 @@ const AppProvider = ({ children }) => {
 
     const searchUser = async (user) => {
         setLoading(true)
-        await axios(`https://api.github.com/users/${user}`)
-            .then(res => {
-                console.log(res);
-                //set user data into state if user exists
-                if (res.data) {
-                    setGithubUser(res.data)
-                    const { followers_url, repos_url } = res.data;
-                    axios(`${followers_url}?per_page=100`)
-                        .then(response => {
-                            setUserFollowers(response.data)
-                        })
-                        .catch(err => console.log(err));
-                    axios(`${repos_url}?per_page=100`)
-                        .then(response => {
-                            setUserRepos(response.data)
-                        })
-                        .catch(err => console.log(err));
-                    setLoading(false);
-                }
-            })
+        const res = await axios(`https://api.github.com/users/${user}`)
             .catch(err => {
                 console.log(err);
                 //if we dont get response set error to true and display message
                 handleError(true, 'User not found')
                 setLoading(false);
             })
-
+        console.log(res);
+        //set user data into state if user exists
+        if (res) {
+            setGithubUser(res.data)
+        }
+        const { followers_url, repos_url } = res.data;
+        //wait for all page to complete fetch, repos and followers
+        await Promise.allSettled([axios(`${followers_url}?per_page=100`), axios(`${repos_url}?per_page=100`)])
+            .then(response => {
+                console.log(response)
+                const [followers, repos] = response;
+                if (followers.status === 'fulfilled') {
+                    setUserFollowers(followers.value.data);
+                }
+                if (repos.status === 'fulfilled') {
+                    setUserRepos(repos.value.data)
+                }
+            })
+            .catch(err => console.log(err))
+        setLoading(false);
     }
 
 

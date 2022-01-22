@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useGlobalContext } from '../context';
 const Search = () => {
+    //state for input user
     const [user, setUser] = useState('');
 
-    const { requests, error } = useGlobalContext();
+    const { requests, error, searchUser } = useGlobalContext();
 
-    //form submit
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(user);
+        searchUser(user);
     }
     //input change
     const handleInput = (e) => {

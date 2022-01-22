@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context';
 const Search = () => {
     const [user, setUser] = useState('');
 
-    const { requests } = useGlobalContext();
+    const { requests, error } = useGlobalContext();
 
     //form submit
     const handleSubmit = (e) => {
@@ -17,7 +17,11 @@ const Search = () => {
         setUser(e.target.value);
     }
     return <section className='section'>
+
         <Wrapper className='section-center'>
+            {error.show ? <ErrorWrapper>
+                <p>{error.msg}</p>
+            </ErrorWrapper> : null}
             <form onSubmit={handleSubmit}>
                 <div className="form-control">
                     <MdSearch />

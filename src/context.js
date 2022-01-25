@@ -5,8 +5,8 @@ import followers from './mockData/mockFollowers'
 import repos from './mockData/mockRepos'
 import 'axios';
 import axios from "axios";
-const rootUrl = 'https://api.github.com';
-//https://api.github.com/users/wesbos
+
+
 
 const AppContext = React.createContext();
 
@@ -44,6 +44,8 @@ const AppProvider = ({ children }) => {
     //Search User
 
     const searchUser = async (user) => {
+        //call handleerror  in the beginning  without arguments to reset it every time we search
+        handleError();
         setLoading(true)
         const res = await axios(`https://api.github.com/users/${user}`)
             .catch(err => {
@@ -52,7 +54,6 @@ const AppProvider = ({ children }) => {
                 handleError(true, 'User not found')
                 setLoading(false);
             })
-        console.log(res);
         //set user data into state if user exists
         if (res) {
             setGithubUser(res.data)

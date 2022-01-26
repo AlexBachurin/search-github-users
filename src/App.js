@@ -7,7 +7,9 @@ function App() {
   const { isAuthenticated, user, isLoading } = useAuth0();
   //display loading after login
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <main>
+      <img className='loading-img' src="https://res.cloudinary.com/dljezd6qv/image/upload/v1643160653/1200x1200_ppwqkf.gif" alt="loading" />
+    </main>
   }
   //if user exists and authenticated then display dashboard, if not navigate back to login page
   const isUser = isAuthenticated && user;

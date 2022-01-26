@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 const Navbar = () => {
-    const { isAuthenticated, logout, user, isLoading } = useAuth0();
-    console.log(isAuthenticated, isLoading, user)
+    const { isAuthenticated, logout, user } = useAuth0();
     const { name, picture } = user;
     const isUser = isAuthenticated && user;
     return <Wrapper>

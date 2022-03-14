@@ -3,36 +3,36 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useGlobalContext } from '../context';
 const Search = () => {
-    //state for input user
-    const [user, setUser] = useState('');
+  //state for input user
+  const [user, setUser] = useState('');
 
-    const { requests, error, searchUser } = useGlobalContext();
+  const { requests, error, searchUser } = useGlobalContext();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        searchUser(user);
-    }
-    //input change
-    const handleInput = (e) => {
-        setUser(e.target.value);
-    }
-    return <section className='section'>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    searchUser(user);
+  }
+  //input change
+  const handleInput = (e) => {
+    setUser(e.target.value);
+  }
+  return <section className='section'>
 
-        <Wrapper className='section-center'>
-            {error.show ? <ErrorWrapper>
-                <p>{error.msg}</p>
-            </ErrorWrapper> : null}
-            <form onSubmit={handleSubmit}>
-                <div className="form-control">
-                    <MdSearch />
-                    <input value={user} onChange={handleInput} type="text" placeholder='enter github user name' />
-                    <button type='submit'>Search</button>
-                </div>
-            </form>
-            <h3>requests: {requests}/60</h3>
-        </Wrapper>
-    </section>;
-};
+    <Wrapper className='section-center'>
+      {error.show ? <ErrorWrapper>
+        <p>{error.msg}</p>
+      </ErrorWrapper> : null}
+      <form onSubmit={handleSubmit}>
+        <div className="form-control">
+          <MdSearch />
+          <input value={user} onChange={handleInput} type="text" placeholder='enter github user name' />
+          <button type='submit'>Search</button>
+        </div>
+      </form>
+      <h3>requests: {requests}/60</h3>
+    </Wrapper>
+  </section>
+}
 
 
 const Wrapper = styled.div`

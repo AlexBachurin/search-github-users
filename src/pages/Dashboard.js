@@ -18,7 +18,7 @@ const Dashboard = () => {
         <Info />
         <UserInfo />
         <Repositories />
-    </main>;
+    </main>
 };
 
 export default Dashboard;

@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 const Navbar = () => {
-    const { isAuthenticated, logout, user } = useAuth0();
-    const { name, picture } = user;
-    const isUser = isAuthenticated && user;
-    return <Wrapper>
-        {/* if we have user authenticated then display welcoming message, if not display nothing
+  const { isAuthenticated, logout, user } = useAuth0();
+  const { name, picture } = user;
+  const isUser = isAuthenticated && user;
+  return <Wrapper>
+    {/* if we have user authenticated then display welcoming message, if not display nothing
         but this is not necessary since we wont show dashboard to not authenticated user */}
-        {isUser ? <>
-            <img src={picture} alt={name}></img>
-            <h4>Welcome, {name.toUpperCase()}</h4>
-            <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
-        </> : null}
+    {isUser ? <>
+      <img src={picture} alt={name}></img>
+      <h4>Welcome, {name.toUpperCase()}</h4>
+      <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
+    </> : null}
 
-    </Wrapper>;
-};
+  </Wrapper>
+}
 
 const Wrapper = styled.nav`
   padding: 1.5rem;

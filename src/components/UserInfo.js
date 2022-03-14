@@ -6,7 +6,7 @@ const UserInfo = () => {
     <Wrapper className='section-center'>
       <UserCard />
       <UserFollowers />
-    </Wrapper>;
+    </Wrapper>
   </section>
 };
 
@@ -18,6 +18,6 @@ const Wrapper = styled.div`
     grid-template-columns: 1fr 1fr;
   }
   /* align-items: start; */
-`;
+`
 
 export default UserInfo;

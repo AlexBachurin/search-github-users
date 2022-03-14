@@ -11,7 +11,7 @@ const Login = () => {
       <h1>Github User</h1>
       <button onClick={loginWithRedirect} className="btn">Log In/Sign In</button>
     </div>
-  </Wrapper>;
+  </Wrapper>
 };
 
 const Wrapper = styled.section`

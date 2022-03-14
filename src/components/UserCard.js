@@ -30,8 +30,8 @@ const UserCard = () => {
       <p><MdLocationOn />{location}</p>
       <a href={blog}><MdLink />{blog}</a>
     </div>
-  </Wrapper>;
-};
+  </Wrapper>
+}
 
 const Wrapper = styled.article`
   background: var(--clr-white);

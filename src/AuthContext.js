@@ -27,6 +27,13 @@ const AuthProvider = ({ children }) => {
             });
     }
 
+    //logout
+    const logout = () => {
+        setIsLoggedIn(false)
+        auth.signOut();
+        // console.log(isLoggedIn, user)
+    }
+
     // useEffect(() => {
 
     //     const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
@@ -47,7 +54,8 @@ const AuthProvider = ({ children }) => {
     return <AuthContext.Provider value={{
         user,
         signIn,
-        isLoggedIn
+        isLoggedIn,
+        logout
     }}>
         {children}
     </AuthContext.Provider>

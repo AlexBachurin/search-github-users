@@ -6,7 +6,7 @@ const Navbar = () => {
   // const { isAuthenticated, logout, user } = useAuth0();
   // const { name, picture } = user;
   // const isUser = isAuthenticated && user;
-  const { isLoggedIn, user } = useAuthContext();
+  const { isLoggedIn, user, logout } = useAuthContext();
   const isUser = isLoggedIn && user;
   return <Wrapper>
     {/* if we have user authenticated then display welcoming message, if not display nothing
@@ -14,7 +14,7 @@ const Navbar = () => {
     {isUser ? <>
       <img src={user.photoUrl} alt={user.displayName}></img>
       <h4>Welcome, {user.displayName.toUpperCase()}</h4>
-      <button onClick={() => console.log('logout')}>Logout</button>
+      <button onClick={() => logout()}>Logout</button>
     </> : null}
 
   </Wrapper>

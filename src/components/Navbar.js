@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
+import { useAuthContext } from '../AuthContext';
 const Navbar = () => {
-  const { isAuthenticated, logout, user } = useAuth0();
-  const { name, picture } = user;
-  const isUser = isAuthenticated && user;
+  // const { isAuthenticated, logout, user } = useAuth0();
+  // const { name, picture } = user;
+  // const isUser = isAuthenticated && user;
+  const { isLoggedIn, user } = useAuthContext();
+  const isUser = isLoggedIn && user;
   return <Wrapper>
     {/* if we have user authenticated then display welcoming message, if not display nothing
         but this is not necessary since we wont show dashboard to not authenticated user */}
     {isUser ? <>
-      <img src={picture} alt={name}></img>
-      <h4>Welcome, {name.toUpperCase()}</h4>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
+      <img src={user.photoUrl} alt={user.displayName}></img>
+      <h4>Welcome, {user.displayName.toUpperCase()}</h4>
+      <button onClick={() => console.log('logout')}>Logout</button>
     </> : null}
 
   </Wrapper>

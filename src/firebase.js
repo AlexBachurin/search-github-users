@@ -20,11 +20,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
 
-// const [user, setUser] = useState('');
+
 
 const auth = getAuth(app);
-
 export { auth };

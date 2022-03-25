@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { auth } from './firebase';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
@@ -31,7 +31,6 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setIsLoggedIn(false)
         auth.signOut();
-        // console.log(isLoggedIn, user)
     }
 
     // useEffect(() => {

@@ -8,11 +8,12 @@ const Navbar = () => {
   // const isUser = isAuthenticated && user;
   const { isLoggedIn, user, logout } = useAuthContext();
   const isUser = isLoggedIn && user;
+  console.log(user)
   return <Wrapper>
     {/* if we have user authenticated then display welcoming message, if not display nothing
         but this is not necessary since we wont show dashboard to not authenticated user */}
     {isUser ? <>
-      <img src={user.photoUrl} alt={user.displayName}></img>
+      <img src={user.photoURL} alt={user.displayName}></img>
       <h4>Welcome, {user.displayName.toUpperCase()}</h4>
       <button onClick={() => logout()}>Logout</button>
     </> : null}

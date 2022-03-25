@@ -1,15 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAuth0 } from '@auth0/auth0-react';
-
+// import { useAuth0 } from '@auth0/auth0-react';
+import { auth } from '../firebase';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0();
+  // Auth0 is not working in Ru anymore
+  // const { loginWithRedirect } = useAuth0();
+  ///Sing in functionality
+  const signIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user)
+      }).catch((error) => {
+        console.log(error);
+      });
+
+  }
   return <Wrapper>
     <div className="container">
       <img src="https://res.cloudinary.com/dljezd6qv/image/upload/v1642692791/login-image-impr.jpg" alt="login_image" />
-      <h1>Github User</h1>
-      <button onClick={loginWithRedirect} className="btn">Log In/Sign In</button>
+      <h1>Github Users</h1>
+      <button onClick={signIn} className="btn">Log In/Sign In</button>
     </div>
   </Wrapper>
 };
